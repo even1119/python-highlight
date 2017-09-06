@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {#    <link href="{{ url_for('static', filename='basic.css') }}" rel="stylesheet">#}
+    {#    <link href="{{ url_for('static', filename='pygments.css') }}" rel="stylesheet">#}
+    {#    <link href="{{ url_for('static', filename='pygments14.css') }}" rel="stylesheet">#}
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='doctools.js') }}"></script>
+    <script src="{{ url_for('static', filename='underscore.js') }}"></script>
+    <title>代码着色</title>
+</head>
+<body>
+<div>
+    <form action="/code" method="post">
+        <p><label for="name">代码功能：</label>
+            <input type="text" name="name" id="name" maxlength="200" size="30">
+            <label for="lang">语言：</label><select id="lang" name="lang">
+                <option value="python">Python</option>
+            </select></p>
+        <p>输入代码:</p>
+        <p><textarea name="code" rows="20" cols="100">{{ name }}</textarea></p>
+        <p><label for="user">Your name (optional):</label>
+            <input type="text" name="user" id="user" maxlength="30" size="20">
+             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <input type="submit" value="Highlight!">
+             &nbsp&nbsp&nbsp<input type="reset" value="Reset">
+        </p>
+
+    </form>
+</div>
+</body>
+</html>
