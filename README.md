@@ -1,7 +1,7 @@
 # python-highlight
 代码着色高亮
 
-基于python3开发
+基于python3开发，也支持python2
 
 需要安装的库：
 flask
