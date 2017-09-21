@@ -2,21 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {#    <link href="{{ url_for('static', filename='basic.css') }}" rel="stylesheet">#}
-    {#    <link href="{{ url_for('static', filename='pygments.css') }}" rel="stylesheet">#}
-    {#    <link href="{{ url_for('static', filename='pygments14.css') }}" rel="stylesheet">#}
-
+    <link href="{{ url_for('static', filename='basic.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='pygments.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='pygments14.css') }}" rel="stylesheet">
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT: '/',
+            VERSION: '',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '',
+            HAS_SOURCE: false
+        };
+    </script>
     <script src="{{ url_for('static', filename='jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='doctools.js') }}"></script>
     <script src="{{ url_for('static', filename='underscore.js') }}"></script>
+    <script src="{{ url_for('static', filename='clipboard.js') }}"></script>
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:300,400,700" rel="stylesheet" type="text/css">
     <style type="text/css">
-        {{ css | safe}}
+        {{ highlightcss | safe}}
     </style>
+    <script>
+        $(document).ready(function () {
+            var btn = document.getElementById('btn');
+            var clipboard = new Clipboard(btn);//实例化
+
+            //复制成功执行的回调，可选
+            clipboard.on('success', function (e) {
+                console.log(e);
+            });
+
+            //复制失败执行的回调，可选
+            clipboard.on('error', function (e) {
+                console.log(e);
+            });
+        })
+    </script>
     <title>代码着色</title>
 </head>
-<body>
-<div>
-    {{ code|safe }}
+<body class="document">
+<div class="document">
+    <div class="documentwrapper">
+        <div class="body" role="main">
+            <h2><a href="/">首页</a>-<a>代码高亮工具</a></h2>
+            <form action="/code" method="post">
+                <p>
+                    <label>语言：</label>
+                    <!--<select id="lang" name="lang">-->
+                        <!--<option value="python">Python</option>-->
+                        <!--<option value="python">HTML</option>-->
+                    <!--</select>-->
+                    <label><input type="radio" value="python" name="lang" {% if lang == 'python' %}checked{% endif %}>python</label>
+                    <label><input type="radio" value="HTML" name="lang" {% if lang == 'HTML' %}checked{% endif %}>HTML</label>
+
+                    <br>
+                    <label >风格：</label>
+                    {% for s in style_list %}
+                        <input type="submit" value="{{s}}" name="style">
+                    {% endfor %}
+                    <!--<select id="style" name="style">-->
+                        <!--{% for s in style_list %}-->
+                        <!--<option value="{{s}}" {% if style == s%}selected{% endif%}>{{s}}</option>-->
+                        <!--{% endfor %}-->
+                    <!--</select>-->
+                </p>
+                <p><textarea name="code" rows="20" cols="159">{{ code }}</textarea></p>
+                <p><label for="user">Your name (optional):</label>
+                    <input type="text" name="user" id="user" maxlength="30" size="20">
+                    <input type="submit" value="代码高亮" name="style">
+                    <input type="button" value="复制到剪切板" id="btn" class="js-copy"  data-clipboard-target=".syntax">
+                </p>
+
+                <div class="hlcode">
+                    {{ highlightcode |safe }}
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
-</body>
+
+
 </html>

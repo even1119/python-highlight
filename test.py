@@ -7,5 +7,5 @@ from pygments.formatters.html import HtmlFormatter
 code = 'print "Hello World"'
 
 print(highlight(code, PythonLexer(), HtmlFormatter()))
-css = HtmlFormatter().get_style_defs('.highlight')
+css = HtmlFormatter().get_style_defs('.syntax')
 print(css)

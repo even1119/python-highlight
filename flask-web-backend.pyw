@@ -11,11 +11,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    # return 'Hello World!'
-    # 123
-    name = 'print("hello world")'
-    return render_template('hello.html', name=name)
+def index():
+    return render_template('index.html')
 
 
 @app.route('/code', methods=['GET', 'POST'])
@@ -27,6 +24,7 @@ def code():
     return render_template('code.html', code=code, css=css)
 
 
+# 运行主程序
 if __name__ == '__main__':
     app.debug = True
     app.run()
