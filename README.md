@@ -11,3 +11,5 @@ pygments
 python flask-web.py
 
 浏览器访问：http://127.0.0.1:5000/
+
+![image](https://github.com/even1119/python-highlight/blob/master/static/highlightcode.png)
